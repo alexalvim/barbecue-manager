@@ -4,11 +4,12 @@ import { BannerTitle, ContentWrapper } from "./styles";
 
 interface IPublicBannerProps {
   title: string;
+  withOverlay?: boolean;
 }
 
-export const Banner = ({ title }: IPublicBannerProps) => {
+export const Banner = ({ title, withOverlay }: IPublicBannerProps) => {
   return (
-    <ContentWrapper>
+    <ContentWrapper withOverlay={!!withOverlay}>
       <BannerTitle>
         {title}
       </BannerTitle>

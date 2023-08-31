@@ -1,37 +1,18 @@
 'use client';
 
-import { getAuthToken } from "@/auth/login"
-import { getUserByToken } from "@/service/user";
-import { IUser } from "@/types";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react"
+import { AuthContext } from "@/context/AuthProvider";
+import { useContext } from "react"
 
 const User = () => {
-  const router = useRouter();
-  const [currentUser, setCurrentUser] = useState<null | IUser>(null);
+  const user = useContext(AuthContext)
 
-  useEffect(() => {
-    const verifyLogin = async () => {
-      const token = getAuthToken();
-      if(token) {
-        const user = await getUserByToken(token);
-
-        if(user && !user.error) {
-          setCurrentUser(user as IUser);
-          return;
-        } 
-      }
-
-      router.push('/login');
-    }
-
-    verifyLogin();
-  }, [])
-
-  if(!currentUser) {
-    return <>Carregando</>
+  if(!user) {
+    return (
+      <>Carregando</>
+    )
   }
-  return (<p>Ola {currentUser.name}</p>)
+
+  return (<p>Ola {user.name}</p>)
 }
 
 export default User
