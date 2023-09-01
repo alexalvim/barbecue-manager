@@ -1,10 +1,7 @@
-import { colors } from '@/colors';
-import { spaces } from '@/spaces';
-import { typo } from '@/typo';
 import styled from 'styled-components';
 
 export const ContentWrapper = styled.div`
-  background-color: ${colors.lightGray};
+  background-color: ${({ theme }) => theme.colors.lightGray};
   height: 192px;
   width: 100%;
   display: flex;
@@ -21,14 +18,14 @@ export const ContentWrapper = styled.div`
 export const IconHolder = styled.div`
   width: 90px;
   height: 90px;
-  background-color: ${colors.mainColor};
+  background-color: ${({ theme }) => theme.colors.mainColor};
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
 
   svg {
-    fill: ${colors.darkestColor};
+    fill: ${({ theme }) => theme.colors.darkestColor};
     opacity: 40%;
     height: 44px;
     width: 40px;
@@ -36,8 +33,8 @@ export const IconHolder = styled.div`
 `;
 
 export const BoxText = styled.div`
-  color: ${colors.darkestColor};
-  margin-top: ${spaces.base};
-  font-size: ${typo.small};
+  color: ${({ theme }) => theme.colors.darkestColor};
+  margin-top: ${({ theme }) => theme.spaces.base};
+  font-size: ${({ theme }) => theme.typo.small};
   font-weight: bold;
 `;

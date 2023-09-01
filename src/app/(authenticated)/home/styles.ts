@@ -1,26 +1,23 @@
-import { colors } from '@/colors';
-import { spaces } from '@/spaces';
-import { typo } from '@/typo';
 import styled from 'styled-components';
 
 export const LoadingMessage = styled.span`
-  color: ${colors.darkestColor};
-  font-size: ${typo.small};
-  padding: 0 ${spaces.base};
+  color: ${({ theme }) => theme.colors.darkestColor};
+  font-size: ${({ theme }) => theme.typo.small};
+  padding: 0 ${({ theme }) => theme.spaces.base};
   width: 100%;
   
   @media (min-width: 48rem) {
-    max-width: ${spaces.containerWidth};
+    max-width: ${({ theme }) => theme.spaces.containerWidth};
   }
 `;
 
 export const ContentWrapper = styled.div`
-  padding: 0 ${spaces.base};
+  padding: 0 ${({ theme }) => theme.spaces.base};
   margin: 0 auto;
   width: 100%;
   transform: translateY(-60px);
   
   @media (min-width: 48rem) {
-    max-width: ${spaces.containerWidth};
+    max-width: ${({ theme }) => theme.spaces.containerWidth};
   }
 `;

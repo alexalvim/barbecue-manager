@@ -1,25 +1,22 @@
-import { colors } from '@/colors';
-import { spaces } from '@/spaces';
-import { typo } from '@/typo';
 import styled from 'styled-components';
 
 export const ContentWrapper = styled.label`
   display: flex;
   flex-direction: column;
-  margin-bottom: ${spaces.large};
+  margin-bottom: ${({ theme }) => theme.spaces.large};
 `;
 
 export const LabelText = styled.label`
-  color: ${colors.darkestColor};
-  font-size: ${typo.medium};
+  color: ${({ theme }) => theme.colors.darkestColor};
+  font-size: ${({ theme }) => theme.typo.medium};
   font-weight: bold;
-  margin-bottom: ${spaces.base};
+  margin-bottom: ${({ theme }) => theme.spaces.base};
 `;
 
 export const FieldInput = styled.input`
   border: none;
-  font-size: ${typo.small};
-  padding: ${spaces.medium} ${spaces.base};
+  font-size: ${({ theme }) => theme.typo.small};
+  padding: ${({ theme }) => theme.spaces.medium} ${({ theme }) => theme.spaces.base};
 
   &::placeholder {
     font-style: italic;
@@ -28,8 +25,8 @@ export const FieldInput = styled.input`
 
 export const FieldTextArea = styled.textarea`
   border: none;
-  font-size: ${typo.small};
-  padding: ${spaces.medium} ${spaces.base};
+  font-size: ${({ theme }) => theme.typo.small};
+  padding: ${({ theme }) => theme.spaces.medium} ${({ theme }) => theme.spaces.base};
   resize: none;
   height: 200px;
   font-family: __Inter_20951f, __Inter_Fallback_20951f;
@@ -43,7 +40,7 @@ export const FieldTextArea = styled.textarea`
 export const ErrorMessage = styled.span`
   display: inline-block;
   font-weight: bold;
-  font-size: ${typo.tiny};
-  color: ${colors.dangerRed};
-  margin-top: ${spaces.small};
+  font-size: ${({ theme }) => theme.typo.tiny};
+  color: ${({ theme }) => theme.colors.dangerRed};
+  margin-top: ${({ theme }) => theme.spaces.small};
 `;

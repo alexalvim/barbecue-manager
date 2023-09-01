@@ -1,15 +1,12 @@
-import { colors } from '@/colors';
-import { spaces } from '@/spaces';
-import { typo } from '@/typo';
 import styled from 'styled-components'
 
 export const Button = styled.button`
-  background-color: ${colors.darkestColor};
+  background-color: ${({ theme }) => theme.colors.darkestColor};
   border: none;
-  color: ${colors.lightestColor};
-  font-size: ${typo.small};
+  color: ${({ theme }) => theme.colors.lightestColor};
+  font-size: ${({ theme }) => theme.typo.small};
   border-radius: 2rem;
-  padding: ${spaces.medium} ${spaces.large};
+  padding: ${({ theme }) => theme.spaces.medium} ${({ theme }) => theme.spaces.large};
   font-weight: bold;
   cursor: pointer;
 `;

@@ -1,8 +1,11 @@
+'use client';
+
 import { Banner } from '@/components/Banner'
 import '../globals.css';
 import { Inter } from 'next/font/google'
-import { colors } from '@/colors'
 import { AuthProvider } from '@/context/AuthProvider';
+import { ThemeProvider } from 'styled-components';
+import { light } from '@/styles/themes/light';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,15 +19,17 @@ export default function RootLayout({
       <head>
         <title>Agenda de churras</title>
       </head>
-      <body className={inter.className} style={{ backgroundColor: colors.mainColor }}>
-        <AuthProvider>
-          <>
-            <Banner
-              withOverlay={true}
-              title={'Agenda de churras'}/>
-            {children}
-          </>
-        </AuthProvider>
+      <body className={inter.className} style={{ backgroundColor: light.colors.mainColor }}>
+        <ThemeProvider theme={light}>
+          <AuthProvider>
+            <>
+              <Banner
+                withOverlay={true}
+                title={'Agenda de churras'}/>
+              {children}
+            </>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

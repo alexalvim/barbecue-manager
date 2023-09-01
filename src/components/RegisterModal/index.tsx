@@ -57,8 +57,6 @@ export const RegisterModal = ({ isOpened, onClose, user }: IRegisterModalProps) 
     })
   }
 
-  console.log({ errors })
-
   return (
     <Modal
       onClose={() => {

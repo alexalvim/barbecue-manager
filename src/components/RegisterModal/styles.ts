@@ -1,18 +1,15 @@
-import { colors } from '@/colors';
-import { spaces } from '@/spaces';
-import { typo } from '@/typo';
 import styled from 'styled-components';
 
 export const ModalTitle = styled.h2`
-  color: ${colors.mainColor};
-  font-size: ${typo.large};
-  margin-bottom: ${spaces.large};
+  color: ${({ theme }) => theme.colors.mainColor};
+  font-size: ${({ theme }) => theme.typo.large};
+  margin-bottom: ${({ theme }) => theme.spaces.large};
 `;
 
 
 export const FieldsWrapper = styled.div`
   input, textarea {
-    border: solid 1px ${colors.darkestColor};
+    border: solid 1px ${({ theme }) => theme.colors.darkestColor};
   }
 `;
 
