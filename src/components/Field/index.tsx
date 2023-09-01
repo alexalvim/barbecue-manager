@@ -6,10 +6,9 @@ interface IFieldProps {
   placeholder: string;
   type: string;
   error: Record<string, any> | null;
-  customErrorMessages?: Record<string,string>;
 }
 
-export const Field = ({ formProps, label, placeholder, type, error, customErrorMessages }: IFieldProps) => {
+export const Field = ({ formProps, label, placeholder, type, error }: IFieldProps) => {
   return (
     <ContentWrapper>
       <LabelText>{label}</LabelText>
@@ -17,20 +16,9 @@ export const Field = ({ formProps, label, placeholder, type, error, customErrorM
         <FieldTextArea placeholder={placeholder} {...formProps}/>
         : <FieldInput type={type} placeholder={placeholder} {...formProps}/>
       }
-      {error ?
+      {error && error.message ?
         <ErrorMessage>
-          {error.type === 'required' ?
-            (customErrorMessages && customErrorMessages['required']) ||
-            'Campo obrigatório!' : null}
-          {error.type === 'minLength' ?
-            (customErrorMessages && customErrorMessages['minLength']) ||
-            'Texto muito curto para este campo!' : null}
-          {error.type === 'pattern' ?
-            (customErrorMessages && customErrorMessages['pattern']) ||
-            'Valor digitado não corresponde com o esperado nesse campo!' : null}
-          {error.type === 'min' ?
-            (customErrorMessages && customErrorMessages['min']) ||
-            'Valor minimo não atingido!' : null}
+          {error.message}
         </ErrorMessage>
       : null}
     </ContentWrapper>

@@ -28,11 +28,11 @@ export const AuthProvider = ({ children, requireLogin }: IAuthProviderProps) => 
           if(requireLogin) {
             setCurrentUser(user as IUser);
             return;
-          } else {
-            clearAuthToken();
-            router.push('/home');
-            return;
           }
+          
+          clearAuthToken();
+          router.push('/home');
+          return;
         } 
       }
 

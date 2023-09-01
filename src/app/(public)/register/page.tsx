@@ -10,10 +10,26 @@ import { Button } from "@/components/Button";
 import { Link } from "@/components/Link";
 import { ErrorArea } from "@/components/ErrorArea";
 import { useState } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const createUserFormSchema = z.object({
+  name: z.string()
+    .nonempty('O Nome do usuário é obrigatório')
+    .min(2, 'O Nome deve conter ao menos 2 caracteres'),
+  email: z.string()
+    .nonempty('O Email do usuário é obrigatório')
+    .email('Valor não corresponde a um email'),
+  password: z.string()
+    .nonempty('A Senha do usuário é obrigatória')
+    .min(8, 'Senha deve conter ao menos 8 caracteres'),
+})
 
 const Register = () => {
   const router = useRouter();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(createUserFormSchema)
+  });
   const [formError, setFormError] = useState<string>('');
   const onSubmit = async (data: Record<string, string>) => {
     const registerStatus = await registerUser(data as unknown as IRegisterUser);
@@ -38,39 +54,21 @@ const Register = () => {
             placeholder={'nome'}
             type={'text'}
             error={errors.name || null}
-            customErrorMessages={{
-              minLength: 'Nome deve conter no mínimo 2 cararteres'
-            }}
-            formProps={{...register('name', {
-              required: true,
-              minLength: 2,
-            })}}/>
+            formProps={{...register('name')}}/>
 
           <Field
             label={'Login'}
             placeholder={'email'}
             type={'email'}
             error={errors.email || null}
-            customErrorMessages={{
-              pattern: 'Valor digitado não é um email'
-            }}
-            formProps={{...register('email', {
-              pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-              required: true
-            })}}/>
+            formProps={{...register('email')}}/>
 
           <Field
             label={'Senha'}
             placeholder={'senha'}
             type={'password'}
             error={errors.password || null}
-            customErrorMessages={{
-              minLength: 'Senha deve conter no mínimo 8 caracteres'
-            }}
-            formProps={{...register('password', {
-              minLength: 8,
-              required: true,
-            })}}/>
+            formProps={{...register('password')}}/>
           
           {formError ? 
             <ErrorArea

@@ -7,6 +7,29 @@ import { IUser } from "@/types";
 import { createBarbecue } from "@/service/user";
 import { v4 as uuidv4 } from 'uuid';
 import { formatCurrencyToCents } from "@/utils";
+import z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const createBarbecueFormSchema = z.object({
+  title: z.string()
+    .nonempty('O título do evento é obrigatório'),
+  eventDate: z.string()
+    .nonempty('A data do churras é obrigatória'),
+  descripton: z.string()
+    .optional(),
+  observation: z.string()
+    .optional(),
+  priceWithDrinks: z.string()
+    .optional()
+    .refine((priceWithDrinks = '') => /^(0|[1-9]\d*)(,\d+)?$/.test(priceWithDrinks), 'Este campo aceita apenas números. Ex: 10,00')
+    .refine((priceWithDrinks = '0') => formatCurrencyToCents(priceWithDrinks) > 0, 'Valor deve ser maior que zero')
+    .transform((priceWithDrinks) => priceWithDrinks ? formatCurrencyToCents(priceWithDrinks) : priceWithDrinks),
+  priceWithoutDrinks: z.string()
+    .optional()
+    .refine((priceWithoutDrinks = '') => /^(0|[1-9]\d*)(,\d+)?$/.test(priceWithoutDrinks), 'Este campo aceita apenas números. Ex: 10,00')
+    .refine((priceWithoutDrinks = '0') => formatCurrencyToCents(priceWithoutDrinks) > 0, 'Valor deve ser maior que zero')
+    .transform((priceWithoutDrinks) => priceWithoutDrinks ? formatCurrencyToCents(priceWithoutDrinks) : priceWithoutDrinks),
+})
 
 interface IRegisterModalProps {
   isOpened: boolean;
@@ -15,7 +38,9 @@ interface IRegisterModalProps {
 }
 
 export const RegisterModal = ({ isOpened, onClose, user }: IRegisterModalProps) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    resolver: zodResolver(createBarbecueFormSchema)
+  });
 
   const onSubmit = (data: Record<string, string>) => {
     createBarbecue({
@@ -25,16 +50,21 @@ export const RegisterModal = ({ isOpened, onClose, user }: IRegisterModalProps) 
         title: data.title,
         description: data.description || '',
         observation: data.observation || '',
-        priceWithDrinks: formatCurrencyToCents(data.priceWithDrinks),
-        priceWithoutDrinks: formatCurrencyToCents(data.priceWithoutDrinks),
+        priceWithDrinks: +data.priceWithDrinks,
+        priceWithoutDrinks: +data.priceWithoutDrinks,
         participants: [],
       }
     })
   }
 
+  console.log({ errors })
+
   return (
     <Modal
-      onClose={onClose}
+      onClose={() => {
+        onClose();
+        reset();
+      }}
       isOpened={isOpened}>
       <ModalTitle>
         Cadastrar churras
@@ -47,68 +77,49 @@ export const RegisterModal = ({ isOpened, onClose, user }: IRegisterModalProps) 
             placeholder={'Título do evento'}
             type={'text'}
             error={errors.title || null}
-            formProps={{
-              ...register('title', {
-                required: true,
-              })}}/>
+            formProps={{...register('title')}}/>
 
           <Field
-            label={'Data do evento'}
+            label={'Data do churras'}
             placeholder={'dd/mm/aaaa'}
             type={'text'}
             error={errors.eventDate || null}
-            formProps={{
-              ...register('eventDate', {
-                required: true,
-              })}}/>
+            formProps={{...register('eventDate')}}/>
           
           <Field
             label={'Descrição'}
             placeholder={'Descrição'}
             type={'textarea'}
             error={errors.description || null}
-            formProps={{
-              ...register('description')}}/>
+            formProps={{...register('description')}}/>
             
           <Field
             label={'Observação'}
             placeholder={'Observação'}
             type={'text'}
             error={errors.observation || null}
-            formProps={{
-              ...register('observation')}}/>
+            formProps={{...register('observation')}}/>
             
           <Field
             label={'Valor com bebida'}
             placeholder={'Valor sugerido com bebida'}
             type={'text'}
             error={errors.priceWithDrinks || null}
-            customErrorMessages={{
-              pattern: 'Este campo aceita apenas números'
-            }}
-            formProps={{
-              ...register('priceWithDrinks', {
-                pattern: /^(0|[1-9]\d*)(,\d+)?$/,
-                min: 1
-              })}}/>
+            formProps={{...register('priceWithDrinks')}}/>
           
           <Field
             label={'Valor sem bebida'}
             placeholder={'Valor sugerido sem bebida'}
             type={'text'}
             error={errors.priceWithoutDrinks || null}
-            customErrorMessages={{
-              pattern: 'Este campo aceita apenas números'
-            }}
-            formProps={{
-              ...register('priceWithoutDrinks', {
-                pattern: /^(0|[1-9]\d*)(,\d+)?$/,
-                min: 1
-              })}}/>
+            formProps={{...register('priceWithoutDrinks')}}/>
         </FieldsWrapper>
 
         <ButtonsWrapper>
-          <Button onClick={onClose}>
+          <Button onClick={() => {
+            onClose();
+            reset();
+          }}>
             Fechar
           </Button>
           <Button

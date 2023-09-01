@@ -12,10 +12,23 @@ import { Button } from "@/components/Button";
 import { Link } from "@/components/Link";
 import { useState } from "react";
 import { ErrorArea } from "@/components/ErrorArea";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const loginUserFormSchema = z.object({
+  email: z.string()
+    .nonempty('O Email do usuário é obrigatório')
+    .email('Valor não corresponde a um email'),
+  password: z.string()
+    .nonempty('A Senha do usuário é obrigatória')
+    .min(8, 'Senha deve conter ao menos 8 caracteres'),
+})
 
 const Login = () => {
   const router = useRouter();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(loginUserFormSchema)
+  });
   const [formError, setFormError] = useState<string>('');
   const onSubmit = async (data: Record<string, string>) => {
     const loginResponse = await login(data as unknown as ILoginAttributes)
@@ -41,28 +54,14 @@ const Login = () => {
             placeholder={'email'}
             type={'email'}
             error={errors.email || null}
-            customErrorMessages={{
-              pattern: 'Valor digitado não é um email'
-            }}
-            formProps={{
-              ...register('email', { 
-                required: true,
-                pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-              })}}/>
+            formProps={{...register('email')}}/>
 
           <Field
             label={'Senha'}
             placeholder={'senha'}
             type={'password'}
             error={errors.password || null}
-            customErrorMessages={{
-              minLength: 'Senha deve conter no mínimo 8 caracteres'
-            }}
-            formProps={{
-              ...register('password', {
-                required: true,
-                minLength: 8,
-              })}}/>
+            formProps={{...register('password')}}/>
 
           {formError ? 
             <ErrorArea
