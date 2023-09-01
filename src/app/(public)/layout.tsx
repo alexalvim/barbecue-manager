@@ -20,7 +20,7 @@ export default function RootLayout({
         <AuthProvider>
           <>
             <Banner
-              withOverlay
+              withOverlay={true}
               title={'Agenda de churras'}/>
             {children}
           </>

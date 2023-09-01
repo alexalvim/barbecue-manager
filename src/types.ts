@@ -4,12 +4,29 @@ export interface IRegisterUser {
   password: string;
 }
 
+export interface IParticipant {
+  id: string;
+  name: string;
+  price: number;
+  paid: boolean;
+}
+
+export interface IBarbecue{
+  id: string;
+  title: string;
+  description: string;
+  observation: string;
+  priceWithDrinks: number;
+  priceWithoutDrinks: number;
+  participants: IParticipant[];
+}
+
 export interface IUser{
   name: string;
   email: string;
   password: string;
   id: number;
-  barbecues: string[];
+  barbecues: IBarbecue[];
   authToken: string;
   error?: string;
 }

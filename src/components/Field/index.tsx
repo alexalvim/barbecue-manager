@@ -1,4 +1,4 @@
-import { ContentWrapper, ErrorMessage, FieldInput, LabelText } from "./styles";
+import { ContentWrapper, ErrorMessage, FieldInput, FieldTextArea, LabelText } from "./styles";
 
 interface IFieldProps {
   formProps: Record<string, any>;
@@ -13,7 +13,10 @@ export const Field = ({ formProps, label, placeholder, type, error, customErrorM
   return (
     <ContentWrapper>
       <LabelText>{label}</LabelText>
-      <FieldInput type={type} placeholder={placeholder} {...formProps}/>
+      {type === 'textarea' ? 
+        <FieldTextArea placeholder={placeholder} {...formProps}/>
+        : <FieldInput type={type} placeholder={placeholder} {...formProps}/>
+      }
       {error ?
         <ErrorMessage>
           {error.type === 'required' ?
@@ -25,6 +28,9 @@ export const Field = ({ formProps, label, placeholder, type, error, customErrorM
           {error.type === 'pattern' ?
             (customErrorMessages && customErrorMessages['pattern']) ||
             'Valor digitado não corresponde com o esperado nesse campo!' : null}
+          {error.type === 'min' ?
+            (customErrorMessages && customErrorMessages['min']) ||
+            'Valor minimo não atingido!' : null}
         </ErrorMessage>
       : null}
     </ContentWrapper>

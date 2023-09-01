@@ -5,6 +5,6 @@ export const spaces = {
   base: '1rem',
   large: '2rem',
 
-  containerWidth: '64rem',
+  containerWidth: '36.25rem',
   authContainerWidth: '18rem',
 }

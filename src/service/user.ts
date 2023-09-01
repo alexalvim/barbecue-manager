@@ -1,7 +1,7 @@
 import sha256 from 'crypto-js/sha256';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ILoginAttributes, IRegisterUser, IUser } from "@/types";
+import { IBarbecue, ILoginAttributes, IRegisterUser, IUser } from "@/types";
 
 const BASE_URL = 'http://localhost:3003';
 
@@ -62,5 +62,34 @@ export const getUserByToken = async (token: string): Promise<IUser | { error: st
   } catch (e) {
     console.error('User not found')
     return { error: 'User not found' };
+  }
+}
+
+interface ICreateBarbecueProps {
+  user: IUser;
+  barbecue: IBarbecue;
+}
+
+export const createBarbecue = async ({ user, barbecue }: ICreateBarbecueProps) => {
+  try {
+    console.log({ user })
+    await fetch(`${BASE_URL}/users/${user.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify({
+        ...user,
+        barbecues: [
+          ...user.barbecues,
+          barbecue
+        ]
+      })
+    });
+
+    return { error: false };
+  } catch (e) {
+    console.error('Error to creat barbecue')
+    return { error: 'Connection error' };
   }
 }

@@ -26,6 +26,20 @@ export const FieldInput = styled.input`
   }
 `;
 
+export const FieldTextArea = styled.textarea`
+  border: none;
+  font-size: ${typo.small};
+  padding: ${spaces.medium} ${spaces.base};
+  resize: none;
+  height: 200px;
+  font-family: __Inter_20951f, __Inter_Fallback_20951f;
+
+  &::placeholder {
+    font-style: italic;
+    font-family: __Inter_20951f, __Inter_Fallback_20951f;
+  }
+`;
+
 export const ErrorMessage = styled.span`
   display: inline-block;
   font-weight: bold;

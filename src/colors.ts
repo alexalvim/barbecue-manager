@@ -3,5 +3,7 @@ export const colors = {
   darkestColor: '#000000',
   lightestColor: '#ffffff',
   dangerRed: '#dc3232',
-  lightRed: '#ffdada'
+  lightRed: '#ffdada',
+  lightGray: '#f1f1f1',
+  overlayGray: '#070707a3',
 }
