@@ -1,14 +1,13 @@
-'use client';
+'use client'
 
 import { Banner } from '@/components/Banner'
 import '../globals.css'
 import { Inter } from 'next/font/google'
 import { AuthProvider } from '@/context/AuthProvider'
-import { ThemeProvider } from 'styled-components';
-import { light } from '@/styles/themes/light';
+import { ThemeProvider } from 'styled-components'
+import { light } from '@/styles/themes/light'
 
 const inter = Inter({ subsets: ['latin'] })
-
 
 export default function RootLayout({
   children,
@@ -24,8 +23,7 @@ export default function RootLayout({
         <ThemeProvider theme={light}>
           <AuthProvider requireLogin>
             <>
-              <Banner
-                title={'Agenda de churras'}/>
+              <Banner title={'Agenda de churras'} />
               {children}
             </>
           </AuthProvider>

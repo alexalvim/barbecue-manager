@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 import styled from 'styled-components'
 
 export const StyledLink = styled(Link)`
@@ -6,4 +6,4 @@ export const StyledLink = styled(Link)`
   font-size: ${({ theme }) => theme.typo.small};
   font-weight: bold;
   cursor: pointer;
-`;
+`

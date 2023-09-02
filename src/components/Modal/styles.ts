@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const ContentWrapper = styled.div`
   position: fixed;
@@ -10,7 +10,7 @@ export const ContentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 export const Box = styled.div`
   background-color: ${({ theme }) => theme.colors.lightestColor};
@@ -19,11 +19,11 @@ export const Box = styled.div`
   min-height: 100%;
   overflow: auto;
   height: 100%;
-  
+
   @media (min-width: 48rem) {
     border-radius: 4px;
     min-height: 0;
     max-width: 28rem;
     max-height: 35rem;
   }
-`;
+`

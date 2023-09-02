@@ -1,32 +1,32 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const ContentWrapper = styled.label`
   display: flex;
   flex-direction: column;
   margin-bottom: ${({ theme }) => theme.spaces.large};
-`;
+`
 
 export const LabelText = styled.label`
   color: ${({ theme }) => theme.colors.darkestColor};
   font-size: ${({ theme }) => theme.typo.medium};
   font-weight: bold;
   margin-bottom: ${({ theme }) => theme.spaces.base};
-`;
+`
 
 export const FieldInput = styled.input`
   border: none;
   font-size: ${({ theme }) => theme.typo.small};
-  padding: ${({ theme }) => theme.spaces.medium} ${({ theme }) => theme.spaces.base};
+  padding: ${({ theme }) => `${theme.spaces.medium} ${theme.spaces.base}`};
 
   &::placeholder {
     font-style: italic;
   }
-`;
+`
 
 export const FieldTextArea = styled.textarea`
   border: none;
   font-size: ${({ theme }) => theme.typo.small};
-  padding: ${({ theme }) => theme.spaces.medium} ${({ theme }) => theme.spaces.base};
+  padding: ${({ theme }) => `${theme.spaces.medium} ${theme.spaces.base}`};
   resize: none;
   height: 200px;
   font-family: __Inter_20951f, __Inter_Fallback_20951f;
@@ -35,7 +35,7 @@ export const FieldTextArea = styled.textarea`
     font-style: italic;
     font-family: __Inter_20951f, __Inter_Fallback_20951f;
   }
-`;
+`
 
 export const ErrorMessage = styled.span`
   display: inline-block;
@@ -43,4 +43,4 @@ export const ErrorMessage = styled.span`
   font-size: ${({ theme }) => theme.typo.tiny};
   color: ${({ theme }) => theme.colors.dangerRed};
   margin-top: ${({ theme }) => theme.spaces.small};
-`;
+`

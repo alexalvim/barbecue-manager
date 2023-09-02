@@ -1,95 +1,110 @@
-import sha256 from 'crypto-js/sha256';
-import { v4 as uuidv4 } from 'uuid';
+import sha256 from 'crypto-js/sha256'
+import { v4 as uuidv4 } from 'uuid'
 
-import { IBarbecue, ILoginAttributes, IRegisterUser, IUser } from "@/types";
-
-const BASE_URL = 'http://localhost:3003';
+import { IBarbecue, ILoginAttributes, IRegisterUser, IUser } from '@/types'
+import { BASE_URL } from '../config'
 
 export const registerUser = async (user: IRegisterUser) => {
   try {
-    const emailsUser: IUser[] = await fetch(`${BASE_URL}/users?email=${user.email}`).then((res) => res.json());
-
-    if(emailsUser.length > 0 ) {
-      return { error: 'User already exist' };
-    }
-
     await fetch(`${BASE_URL}/users`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
       },
       body: JSON.stringify({
         ...user,
         password: sha256(user.password).toString(),
         barbecues: [],
         authToken: uuidv4(),
-      })
-    });
+      }),
+    })
 
-    return { error: false };
+    return { error: false }
   } catch (e) {
     console.error('Register failure')
-    return { error: 'Connection error' };
+    return { error: 'Connection error' }
+  }
+}
+
+export const verifyEmailAvailability = async (email: string) => {
+  try {
+    const emailsUser: IUser[] = await fetch(
+      `${BASE_URL}/users?email=${email}`,
+    ).then((res) => res.json())
+
+    if (emailsUser.length > 0) {
+      return { availability: false }
+    }
+
+    return { availability: true }
+  } catch (e) {
+    console.error('Register failure')
+    return { error: 'Connection error' }
   }
 }
 
 export const login = async ({ email, password }: ILoginAttributes) => {
   try {
     const matchedUsers: IUser[] = await fetch(
-                                            `${BASE_URL}/users?email=${email}&password=${sha256(password).toString()}`
-                                            ).then((res) => res.json());
+      `${BASE_URL}/users?email=${email}&password=${sha256(
+        password,
+      ).toString()}`,
+    ).then((res) => res.json())
 
-    if(matchedUsers.length > 0 ) {
-      return { token: matchedUsers[0].authToken };
+    if (matchedUsers.length > 0) {
+      return { token: matchedUsers[0].authToken }
     }
 
-    return { error: 'Email or password wrong' };
+    return { error: 'Email or password wrong' }
   } catch (e) {
     console.error('Login failure')
-    return { error: 'Login error' };
+    return { error: 'Login error' }
   }
 }
 
-export const getUserByToken = async (token: string): Promise<IUser | { error: string }>=> {
+export const getUserByToken = async (
+  token: string,
+): Promise<IUser | { error: string }> => {
   try {
-    const matchedUsers: IUser[] = await fetch(`${BASE_URL}/users?authToken=${token}`).then((res) => res.json());
+    const matchedUsers: IUser[] = await fetch(
+      `${BASE_URL}/users?authToken=${token}`,
+    ).then((res) => res.json())
 
-    if(matchedUsers.length > 0 ) {
-      return matchedUsers[0];
+    if (matchedUsers.length > 0) {
+      return matchedUsers[0]
     }
 
-    return { error: 'User not found' };
+    return { error: 'User not found' }
   } catch (e) {
     console.error('User not found')
-    return { error: 'User not found' };
+    return { error: 'User not found' }
   }
 }
 
 interface ICreateBarbecueProps {
-  user: IUser;
-  barbecue: IBarbecue;
+  user: IUser
+  barbecue: IBarbecue
 }
 
-export const createBarbecue = async ({ user, barbecue }: ICreateBarbecueProps) => {
+export const createBarbecue = async ({
+  user,
+  barbecue,
+}: ICreateBarbecueProps) => {
   try {
-    console.log({ user })
     await fetch(`${BASE_URL}/users/${user.id}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
       },
       body: JSON.stringify({
         ...user,
-        barbecues: [
-          ...user.barbecues,
-          barbecue
-        ]
-      })
-    });
+        barbecues: [...user.barbecues, barbecue],
+      }),
+    })
 
-    return { error: false };
+    return { error: false }
   } catch (e) {
     console.error('Error to creat barbecue')
-    return { error: 'Connection error' };
+    return { error: 'Connection error' }
   }
 }

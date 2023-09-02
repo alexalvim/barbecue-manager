@@ -1,4 +1,3 @@
-
 import styled from 'styled-components'
 
 export const ContentWrapper = styled.div`
@@ -12,4 +11,4 @@ export const ContentWrapper = styled.div`
   justify-content: center;
   border: solid 1px ${({ theme }) => theme.colors.dangerRed};
   margin-bottom: ${({ theme }) => theme.spaces.base};
-`;
+`

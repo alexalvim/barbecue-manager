@@ -1,5 +1,3 @@
-import { StyledLink } from './styles';
+import { StyledLink } from './styles'
 
-export {
-  StyledLink as Link
-}
+export { StyledLink as Link }

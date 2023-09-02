@@ -1,4 +1,4 @@
-const AUTH_TOKEN_NAME = 'barbecue-manager-token';
+const AUTH_TOKEN_NAME = 'barbecue-manager-token'
 
 export const getAuthToken = () => {
   return sessionStorage.getItem(AUTH_TOKEN_NAME)

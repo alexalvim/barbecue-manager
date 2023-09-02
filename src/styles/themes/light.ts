@@ -26,5 +26,5 @@ export const light = {
     small: '1.125rem',
     medium: '1.25rem',
     large: '2rem',
-  }
+  },
 }

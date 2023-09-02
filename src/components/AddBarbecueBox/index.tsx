@@ -1,19 +1,17 @@
-import OutdoorGrillOutlinedIcon from '@mui/icons-material/OutdoorGrillOutlined';
-import { BoxText, ContentWrapper, IconHolder } from './styles';
+import OutdoorGrillOutlinedIcon from '@mui/icons-material/OutdoorGrillOutlined'
+import { BoxText, ContentWrapper, IconHolder } from './styles'
 
 interface IAddBarbecueBoxProps {
-  onClick: () => void;
+  onClick: () => void
 }
 
 export const AddBarbecueBox = ({ onClick }: IAddBarbecueBoxProps) => {
   return (
-    <ContentWrapper role='button' onClick={onClick}>
+    <ContentWrapper role="button" onClick={onClick}>
       <IconHolder>
-        <OutdoorGrillOutlinedIcon/>
+        <OutdoorGrillOutlinedIcon />
       </IconHolder>
-      <BoxText>
-        Adicionar churras
-      </BoxText>
+      <BoxText>Adicionar churras</BoxText>
     </ContentWrapper>
   )
 }

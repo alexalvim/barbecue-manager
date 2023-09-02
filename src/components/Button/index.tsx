@@ -1,5 +1,3 @@
-import { Button } from './styles';
+import { Button } from './styles'
 
-export {
-  Button
-}
+export { Button }
