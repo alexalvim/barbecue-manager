@@ -14,7 +14,7 @@ export const ContentWrapper = styled.div`
 
 export const Box = styled.div`
   background-color: ${({ theme }) => theme.colors.lightestColor};
-  padding: ${({ theme }) => theme.spaces.large};
+  padding: ${({ theme }) => theme.spaces.largest};
   width: 100%;
   min-height: 100%;
   overflow: auto;

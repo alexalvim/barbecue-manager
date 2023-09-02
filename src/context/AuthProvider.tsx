@@ -1,7 +1,7 @@
 'use client'
 
 import { clearAuthToken, getAuthToken } from '@/auth/login'
-import { getUserByToken } from '@/service/user'
+import { useUser } from '@/service/user'
 import { IUser } from '@/types'
 import { useRouter } from 'next/navigation'
 import { createContext, useEffect, useState } from 'react'
@@ -18,36 +18,25 @@ export const AuthProvider = ({
   requireLogin,
 }: IAuthProviderProps) => {
   const router = useRouter()
-  const [currentUser, setCurrentUser] = useState<null | IUser>(null)
+  const token = getAuthToken()
+  const { user, error, isLoading } = useUser(token || '')
 
   useEffect(() => {
     const verifyLogin = async () => {
-      const token = getAuthToken()
-
-      if (token) {
-        const user = await getUserByToken(token)
-
-        if (user && !user.error) {
-          if (requireLogin) {
-            setCurrentUser(user as IUser)
-            return
-          }
-
+      if (!isLoading) {
+        if (requireLogin && (!token || !user || error)) {
           clearAuthToken()
+          router.push('/login')
+        } else if (!requireLogin && token && user) {
           router.push('/home')
-          return
         }
-      }
-
-      if (requireLogin) {
-        router.push('/login')
       }
     }
 
     verifyLogin()
-  }, [])
+  }, [isLoading])
 
   return (
-    <AuthContext.Provider value={currentUser}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={user || null}>{children}</AuthContext.Provider>
   )
 }

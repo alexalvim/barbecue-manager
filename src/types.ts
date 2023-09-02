@@ -18,6 +18,7 @@ export interface IBarbecue {
   observation: string
   priceWithDrinks: number
   priceWithoutDrinks: number
+  eventDate: string
   participants: IParticipant[]
 }
 

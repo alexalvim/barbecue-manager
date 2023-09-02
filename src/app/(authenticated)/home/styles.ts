@@ -12,12 +12,35 @@ export const LoadingMessage = styled.span`
 `
 
 export const ContentWrapper = styled.div`
-  padding: 0 ${({ theme }) => theme.spaces.base};
+  padding: ${({ theme }) => `0 ${theme.spaces.base} ${theme.spaces.large}`};
   margin: 0 auto;
   width: 100%;
   transform: translateY(-60px);
 
   @media (min-width: 48rem) {
     max-width: ${({ theme }) => theme.spaces.containerWidth};
+  }
+`
+
+export const BarbecuesList = styled.ul`
+  display: block;
+
+  > li {
+    margin-bottom: ${({ theme }) => theme.spaces.base};
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: ${({ theme }) => theme.spaces.base};
+    row-gap: ${({ theme }) => theme.spaces.base};
+
+    > li {
+      margin-bottom: 0;
+    }
   }
 `

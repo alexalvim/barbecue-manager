@@ -1,8 +1,10 @@
 import sha256 from 'crypto-js/sha256'
 import { v4 as uuidv4 } from 'uuid'
+import useSWR, { mutate } from 'swr'
 
 import { IBarbecue, ILoginAttributes, IRegisterUser, IUser } from '@/types'
 import { BASE_URL } from '../config'
+import { fetcher } from './utils'
 
 export const registerUser = async (user: IRegisterUser) => {
   try {
@@ -62,22 +64,22 @@ export const login = async ({ email, password }: ILoginAttributes) => {
   }
 }
 
-export const getUserByToken = async (
-  token: string,
-): Promise<IUser | { error: string }> => {
-  try {
-    const matchedUsers: IUser[] = await fetch(
-      `${BASE_URL}/users?authToken=${token}`,
-    ).then((res) => res.json())
+export interface IUseUserReturn {
+  user: IUser | undefined
+  isLoading: boolean
+  error: Error | undefined
+}
 
-    if (matchedUsers.length > 0) {
-      return matchedUsers[0]
-    }
+export const useUser = (token: string): IUseUserReturn => {
+  const { data, isLoading, error } = useSWR<IUser[], Error>(
+    `${BASE_URL}/users?authToken=${token}`,
+    fetcher,
+  )
 
-    return { error: 'User not found' }
-  } catch (e) {
-    console.error('User not found')
-    return { error: 'User not found' }
+  return {
+    user: data && data.length > 0 ? data[0] : undefined,
+    isLoading,
+    error,
   }
 }
 
@@ -102,6 +104,7 @@ export const createBarbecue = async ({
       }),
     })
 
+    await mutate(`${BASE_URL}/users?authToken=${user.authToken}`)
     return { error: false }
   } catch (e) {
     console.error('Error to creat barbecue')

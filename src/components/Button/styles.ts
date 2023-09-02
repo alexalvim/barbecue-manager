@@ -6,7 +6,7 @@ export const Button = styled.button`
   color: ${({ theme }) => theme.colors.lightestColor};
   font-size: ${({ theme }) => theme.typo.small};
   border-radius: 2rem;
-  padding: ${({ theme }) => `${theme.spaces.medium} ${theme.spaces.large}`};
+  padding: ${({ theme }) => `${theme.spaces.medium} ${theme.spaces.largest}`};
   font-weight: bold;
   cursor: pointer;
 `

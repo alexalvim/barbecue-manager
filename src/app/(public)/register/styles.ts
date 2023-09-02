@@ -20,6 +20,6 @@ export const ActionsHolder = styled.div`
   flex-direction: column;
 
   a {
-    margin-bottom: ${({ theme }) => theme.spaces.large};
+    margin-bottom: ${({ theme }) => theme.spaces.largest};
   }
 `

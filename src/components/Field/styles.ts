@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const ContentWrapper = styled.label`
   display: flex;
   flex-direction: column;
-  margin-bottom: ${({ theme }) => theme.spaces.large};
+  margin-bottom: ${({ theme }) => theme.spaces.largest};
 `
 
 export const LabelText = styled.label`

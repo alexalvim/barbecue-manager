@@ -2,9 +2,10 @@
 
 import { AuthContext } from '@/context/AuthProvider'
 import { useContext, useState } from 'react'
-import { ContentWrapper, LoadingMessage } from './styles'
+import { BarbecuesList, ContentWrapper, LoadingMessage } from './styles'
 import { AddBarbecueBox } from '@/components/AddBarbecueBox'
 import { RegisterModal } from '@/components/RegisterModal'
+import { BarbecueBox } from '@/components/BarbecueBox'
 
 const User = () => {
   const user = useContext(AuthContext)
@@ -17,7 +18,16 @@ const User = () => {
   return (
     <>
       <ContentWrapper>
-        <AddBarbecueBox onClick={() => setRegisterModalOpened(true)} />
+        <BarbecuesList>
+          {user.barbecues.map((b) => (
+            <li key={b.id}>
+              <BarbecueBox barbecue={b} />
+            </li>
+          ))}
+          <li>
+            <AddBarbecueBox onClick={() => setRegisterModalOpened(true)} />
+          </li>
+        </BarbecuesList>
       </ContentWrapper>
       <RegisterModal
         user={user}

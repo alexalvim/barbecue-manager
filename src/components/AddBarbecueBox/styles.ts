@@ -9,6 +9,7 @@ export const ContentWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   cursor: pointer;
+  border-radius: 2px;
 
   @media (min-width: 48rem) {
     width: 282px;

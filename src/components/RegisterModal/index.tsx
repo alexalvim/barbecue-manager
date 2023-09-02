@@ -25,29 +25,29 @@ const createBarbecueFormSchema = z.object({
     .string()
     .optional()
     .refine(
-      (priceWithDrinks = '') => /^(0|[1-9]\d*)(,\d+)?$/.test(priceWithDrinks),
+      (priceWithDrinks = '') =>
+        /^(0|[1-9]\d*)(,\d+)?$/.test(priceWithDrinks) || priceWithDrinks === '',
       'Este campo aceita apenas números. Ex: 10,00',
     )
     .transform((priceWithDrinks) =>
       priceWithDrinks
         ? formatCurrencyToCents(priceWithDrinks)
         : priceWithDrinks,
-    )
-    .or(z.literal('')),
+    ),
   priceWithoutDrinks: z
     .string()
     .optional()
     .refine(
       (priceWithoutDrinks = '') =>
-        /^(0|[1-9]\d*)(,\d+)?$/.test(priceWithoutDrinks),
+        /^(0|[1-9]\d*)(,\d+)?$/.test(priceWithoutDrinks) ||
+        priceWithoutDrinks === '',
       'Este campo aceita apenas números. Ex: 10,00',
     )
     .transform((priceWithoutDrinks) =>
       priceWithoutDrinks
         ? formatCurrencyToCents(priceWithoutDrinks)
         : priceWithoutDrinks,
-    )
-    .or(z.literal('')),
+    ),
 })
 
 interface IRegisterModalProps {
@@ -70,8 +70,8 @@ export const RegisterModal = ({
     resolver: zodResolver(createBarbecueFormSchema),
   })
 
-  const onSubmit = (data: Record<string, string>) => {
-    createBarbecue({
+  const onSubmit = async (data: Record<string, string>) => {
+    await createBarbecue({
       user,
       barbecue: {
         id: uuidv4(),
@@ -80,9 +80,13 @@ export const RegisterModal = ({
         observation: data.observation || '',
         priceWithDrinks: +data.priceWithDrinks,
         priceWithoutDrinks: +data.priceWithoutDrinks,
+        eventDate: data.eventDate,
         participants: [],
       },
     })
+
+    onClose()
+    reset()
   }
 
   return (
@@ -130,7 +134,7 @@ export const RegisterModal = ({
           />
 
           <Field
-            label={'Valor com bebida'}
+            label={'Valor sugerido com bebida'}
             placeholder={'Valor sugerido com bebida'}
             type={'text'}
             error={errors.priceWithDrinks || null}
@@ -138,7 +142,7 @@ export const RegisterModal = ({
           />
 
           <Field
-            label={'Valor sem bebida'}
+            label={'Valor sugerido sem bebida'}
             placeholder={'Valor sugerido sem bebida'}
             type={'text'}
             error={errors.priceWithoutDrinks || null}
