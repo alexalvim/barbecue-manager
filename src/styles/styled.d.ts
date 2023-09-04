@@ -13,6 +13,8 @@ declare module 'styled-components' {
       lightGray: string
       overlayGray: string
       defaultBoxShadow: string
+      darkYellow: string
+      lightYellow: string
     }
 
     spaces: {

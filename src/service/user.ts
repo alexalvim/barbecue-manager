@@ -2,7 +2,13 @@ import sha256 from 'crypto-js/sha256'
 import { v4 as uuidv4 } from 'uuid'
 import useSWR, { mutate } from 'swr'
 
-import { IBarbecue, ILoginAttributes, IRegisterUser, IUser } from '@/types'
+import {
+  IBarbecue,
+  ILoginAttributes,
+  IParticipant,
+  IRegisterUser,
+  IUser,
+} from '@/types'
 import { BASE_URL } from '../config'
 import { fetcher } from './utils'
 
@@ -108,6 +114,133 @@ export const createBarbecue = async ({
     return { error: false }
   } catch (e) {
     console.error('Error to creat barbecue')
+    return { error: 'Connection error' }
+  }
+}
+
+interface IAddParticipantProps {
+  user: IUser
+  barbecueId: string
+  participant: IParticipant
+}
+
+export const addParticipant = async ({
+  user,
+  barbecueId,
+  participant,
+}: IAddParticipantProps) => {
+  try {
+    await fetch(`${BASE_URL}/users/${user.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify({
+        ...user,
+        barbecues: user.barbecues.map((b) => {
+          if (b.id === barbecueId) {
+            return {
+              ...b,
+              participants: [...b.participants, participant],
+            }
+          }
+          return b
+        }),
+      }),
+    })
+
+    await mutate(`${BASE_URL}/users?authToken=${user.authToken}`)
+    return { error: false }
+  } catch (e) {
+    console.error('Error to add participant')
+    return { error: 'Connection error' }
+  }
+}
+
+interface ITogglePaidParticipant {
+  user: IUser
+  barbecueId: string
+  participantId: string
+}
+
+export const togglePaidParticipant = async ({
+  user,
+  barbecueId,
+  participantId,
+}: ITogglePaidParticipant) => {
+  try {
+    await fetch(`${BASE_URL}/users/${user.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify({
+        ...user,
+        barbecues: user.barbecues.map((b) => {
+          if (b.id === barbecueId) {
+            return {
+              ...b,
+              participants: b.participants.map((p) => {
+                if (p.id === participantId) {
+                  return {
+                    ...p,
+                    paid: !p.paid,
+                  }
+                }
+                return p
+              }),
+            }
+          }
+          return b
+        }),
+      }),
+    })
+
+    await mutate(`${BASE_URL}/users?authToken=${user.authToken}`)
+    return { error: false }
+  } catch (e) {
+    console.error('Error to add participant')
+    return { error: 'Connection error' }
+  }
+}
+
+interface IRemoveBarbecueParticipant {
+  user: IUser
+  barbecueId: string
+  participantId: string
+}
+
+export const removeBarbecueParticipant = async ({
+  user,
+  barbecueId,
+  participantId,
+}: IRemoveBarbecueParticipant) => {
+  try {
+    await fetch(`${BASE_URL}/users/${user.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify({
+        ...user,
+        barbecues: user.barbecues.map((b) => {
+          if (b.id === barbecueId) {
+            return {
+              ...b,
+              participants: b.participants.filter(
+                (p) => p.id !== participantId,
+              ),
+            }
+          }
+          return b
+        }),
+      }),
+    })
+
+    await mutate(`${BASE_URL}/users?authToken=${user.authToken}`)
+    return { error: false }
+  } catch (e) {
+    console.error('Error to add participant')
     return { error: 'Connection error' }
   }
 }

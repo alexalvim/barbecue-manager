@@ -9,6 +9,8 @@ export const light = {
     lightRed: '#ffdada',
     lightGray: '#f1f1f1',
     overlayGray: '#070707a3',
+    darkYellow: '#998220',
+    lightYellow: '#E5C231',
     defaultBoxShadow: 'rgba(0, 0, 0, 0.1) 0 0 1rem 0',
   },
 

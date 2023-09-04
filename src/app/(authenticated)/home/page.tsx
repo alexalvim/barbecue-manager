@@ -4,12 +4,13 @@ import { AuthContext } from '@/context/AuthProvider'
 import { useContext, useState } from 'react'
 import { BarbecuesList, ContentWrapper, LoadingMessage } from './styles'
 import { AddBarbecueBox } from '@/components/AddBarbecueBox'
-import { RegisterModal } from '@/components/RegisterModal'
+import { RegisterBarbecueModal } from '@/components/RegisterBarbecueModal'
 import { BarbecueBox } from '@/components/BarbecueBox'
 
-const User = () => {
+const Home = () => {
   const user = useContext(AuthContext)
-  const [registerModalOpened, setRegisterModalOpened] = useState<boolean>(false)
+  const [registerBarbecueModalOpened, setRegisterBarbecueModalOpened] =
+    useState<boolean>(false)
 
   if (!user) {
     return <LoadingMessage>Carregando</LoadingMessage>
@@ -25,17 +26,19 @@ const User = () => {
             </li>
           ))}
           <li>
-            <AddBarbecueBox onClick={() => setRegisterModalOpened(true)} />
+            <AddBarbecueBox
+              onClick={() => setRegisterBarbecueModalOpened(true)}
+            />
           </li>
         </BarbecuesList>
       </ContentWrapper>
-      <RegisterModal
+      <RegisterBarbecueModal
         user={user}
-        onClose={() => setRegisterModalOpened(false)}
-        isOpened={registerModalOpened}
+        onClose={() => setRegisterBarbecueModalOpened(false)}
+        isOpened={registerBarbecueModalOpened}
       />
     </>
   )
 }
 
-export default User
+export default Home

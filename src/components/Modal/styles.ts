@@ -22,6 +22,7 @@ export const Box = styled.div`
 
   @media (min-width: 48rem) {
     border-radius: 4px;
+    height: auto;
     min-height: 0;
     max-width: 28rem;
     max-height: 35rem;

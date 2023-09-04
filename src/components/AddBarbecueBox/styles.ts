@@ -11,6 +11,10 @@ export const ContentWrapper = styled.div`
   cursor: pointer;
   border-radius: 2px;
 
+  &:hover span {
+    text-decoration: underline;
+  }
+
   @media (min-width: 48rem) {
     width: 282px;
   }
@@ -33,7 +37,7 @@ export const IconHolder = styled.div`
   }
 `
 
-export const BoxText = styled.div`
+export const BoxText = styled.span`
   color: ${({ theme }) => theme.colors.darkestColor};
   margin-top: ${({ theme }) => theme.spaces.base};
   font-size: ${({ theme }) => theme.typo.small};

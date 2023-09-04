@@ -4,10 +4,11 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
 import {
   ContentWrapper,
   EventDate,
-  EventTitle,
+  BarbecueTitle,
   TopicHolder,
   TopicInfo,
 } from './styles'
+import { formatCentsToCurrency } from '@/utils'
 
 interface IBarbecueBoxProps {
   barbecue: IBarbecue
@@ -17,8 +18,10 @@ export const BarbecueBox = ({ barbecue }: IBarbecueBoxProps) => {
   return (
     <ContentWrapper>
       <div>
-        <EventDate>{barbecue.eventDate}</EventDate>
-        <EventTitle>{barbecue.title}</EventTitle>
+        <EventDate href={`/barbecues/${barbecue.id}`}>
+          {barbecue.eventDate}
+        </EventDate>
+        <BarbecueTitle>{barbecue.title}</BarbecueTitle>
       </div>
       <TopicHolder>
         <TopicInfo>
@@ -26,7 +29,12 @@ export const BarbecueBox = ({ barbecue }: IBarbecueBoxProps) => {
         </TopicInfo>
         <TopicInfo>
           <MonetizationOnIcon /> R$
-          {barbecue.participants.reduce((acc, p) => acc + p.price, 0)}
+          {formatCentsToCurrency(
+            barbecue.participants.reduce(
+              (acc, p) => acc + p.contributeValue,
+              0,
+            ) || 0,
+          )}
         </TopicInfo>
       </TopicHolder>
     </ContentWrapper>

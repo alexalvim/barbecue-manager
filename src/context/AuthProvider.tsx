@@ -4,7 +4,7 @@ import { clearAuthToken, getAuthToken } from '@/auth/login'
 import { useUser } from '@/service/user'
 import { IUser } from '@/types'
 import { useRouter } from 'next/navigation'
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect } from 'react'
 
 interface IAuthProviderProps {
   children: JSX.Element

@@ -7,7 +7,7 @@ export interface IRegisterUser {
 export interface IParticipant {
   id: string
   name: string
-  price: number
+  contributeValue: number
   paid: boolean
 }
 

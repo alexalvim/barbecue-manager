@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 
 export const ContentWrapper = styled.div`
@@ -16,18 +17,26 @@ export const ContentWrapper = styled.div`
   }
 `
 
-export const EventDate = styled.h4`
+export const EventDate = styled(Link)`
   color: ${({ theme }) => theme.colors.darkestColor};
   font-weight: bold;
+  display: inline-block;
+  text-decoration: none;
   font-size: ${({ theme }) => theme.typo.medium};
   margin-bottom: ${({ theme }) => theme.spaces.medium};
+
+  &:hover {
+    text-decoration: underline;
+  }
 `
 
-export const EventTitle = styled.span`
+export const BarbecueTitle = styled.span`
   color: ${({ theme }) => theme.colors.darkestColor};
   font-weight: 500;
+  display: block;
   font-size: ${({ theme }) => theme.typo.small};
   margin-bottom: ${({ theme }) => theme.spaces.small};
+  opacity: 0.8;
 `
 
 export const TopicHolder = styled.div`

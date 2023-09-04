@@ -9,7 +9,7 @@ interface IPublicBannerProps {
 
 export const Banner = ({ title, withOverlay }: IPublicBannerProps) => {
   return (
-    <ContentWrapper withOverlay={!!withOverlay}>
+    <ContentWrapper $withOverlay={!!withOverlay}>
       <BannerTitle>{title}</BannerTitle>
     </ContentWrapper>
   )

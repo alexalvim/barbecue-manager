@@ -1,12 +1,3 @@
 {
-  "users": [
-    {
-      "name": "Alex Alvim Assis",
-      "email": "alex.alvim19@gmail.com",
-      "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
-      "barbecues": [],
-      "authToken": "124f6e1c-232c-4325-8a15-fc62c815096a",
-      "id": 1
-    }
-  ]
+  "users": []
 }

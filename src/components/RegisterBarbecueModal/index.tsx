@@ -19,7 +19,7 @@ const createBarbecueFormSchema = z.object({
       (eventDate) => /\d{2}\/\d{2}\/\d{4}/.test(eventDate),
       'Valor inserido não é uma data válida',
     ),
-  descripton: z.string().optional(),
+  description: z.string().optional(),
   observation: z.string().optional(),
   priceWithDrinks: z
     .string()
@@ -50,17 +50,17 @@ const createBarbecueFormSchema = z.object({
     ),
 })
 
-interface IRegisterModalProps {
+interface IRegisterBarbecueModalProps {
   isOpened: boolean
   onClose: () => void
   user: IUser
 }
 
-export const RegisterModal = ({
+export const RegisterBarbecueModal = ({
   isOpened,
   onClose,
   user,
-}: IRegisterModalProps) => {
+}: IRegisterBarbecueModalProps) => {
   const {
     register,
     handleSubmit,
@@ -134,16 +134,16 @@ export const RegisterModal = ({
           />
 
           <Field
-            label={'Valor sugerido com bebida'}
-            placeholder={'Valor sugerido com bebida'}
+            label={'Valor sugerido com bebida em reais'}
+            placeholder={'Ex: 10,00'}
             type={'text'}
             error={errors.priceWithDrinks || null}
             formProps={{ ...register('priceWithDrinks') }}
           />
 
           <Field
-            label={'Valor sugerido sem bebida'}
-            placeholder={'Valor sugerido sem bebida'}
+            label={'Valor sugerido sem bebida em reais'}
+            placeholder={'Ex: 5,00'}
             type={'text'}
             error={errors.priceWithoutDrinks || null}
             formProps={{ ...register('priceWithoutDrinks') }}
