@@ -8,7 +8,12 @@ interface ICustomCheckboxProps {
 export const CustomCheckbox = ({ checked, onCheck }: ICustomCheckboxProps) => {
   return (
     <Container>
-      <Input type="checkbox" checked={checked} onChange={onCheck} />
+      <Input
+        data-testid={'customcheckbox-input'}
+        type="checkbox"
+        checked={checked}
+        onChange={onCheck}
+      />
       <Indicator />
     </Container>
   )
