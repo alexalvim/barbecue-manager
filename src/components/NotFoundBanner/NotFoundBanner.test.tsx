@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import { light } from '@/styles/themes/light'
 import { NotFoundBanner } from '.'
 
-describe('Modal', () => {
+describe('NotFoundBanner', () => {
   it('should render component correctly', () => {
     render(
       <ThemeProvider theme={light}>
