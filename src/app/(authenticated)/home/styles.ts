@@ -3,8 +3,10 @@ import styled from 'styled-components'
 export const LoadingMessage = styled.span`
   color: ${({ theme }) => theme.colors.darkestColor};
   font-size: ${({ theme }) => theme.typo.small};
-  padding: 0 ${({ theme }) => theme.spaces.base};
+  padding: ${({ theme }) => theme.spaces.base};
   width: 100%;
+  margin: 0 auto;
+  display: block;
 
   @media (min-width: 48rem) {
     max-width: ${({ theme }) => theme.spaces.containerWidth};
