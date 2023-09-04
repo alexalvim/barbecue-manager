@@ -16,21 +16,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <head>
-        <title>Agenda de churras</title>
-      </head>
-      <body className={inter.className}>
-        <ThemeProvider theme={light}>
-          <AuthProvider requireLogin>
-            <>
-              <Header />
-              <Banner title={'Agenda de churras'} />
-              {children}
-            </>
-          </AuthProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <AuthProvider requireLogin>
+      <>
+        <Header />
+        <Banner title={'Agenda de churras'} />
+        {children}
+      </>
+    </AuthProvider>
   )
 }

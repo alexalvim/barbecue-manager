@@ -15,23 +15,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <head>
-        <title>Agenda de churras</title>
-      </head>
-      <body
-        className={inter.className}
-        style={{ backgroundColor: light.colors.mainColor }}
-      >
-        <ThemeProvider theme={light}>
-          <AuthProvider>
-            <>
-              <Banner withOverlay={true} title={'Agenda de churras'} />
-              {children}
-            </>
-          </AuthProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <AuthProvider>
+      <>
+        <Banner withOverlay={true} title={'Agenda de churras'} />
+        {children}
+      </>
+    </AuthProvider>
   )
 }
