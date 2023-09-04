@@ -23,17 +23,19 @@ export const AuthProvider = ({
 
   useEffect(() => {
     const verifyLogin = async () => {
-      if (!isLoading) {
-        if (requireLogin && (!token || !user || error)) {
-          clearAuthToken()
-          router.push('/login')
-        } else if (!requireLogin && token && user) {
-          router.push('/home')
-        }
+      if (isLoading) {
+        return
+      }
+      if (requireLogin && (!token || !user || error)) {
+        clearAuthToken()
+        router.push('/login')
+      } else if (!requireLogin && token && user) {
+        router.push('/home')
       }
     }
 
     verifyLogin()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
 
   return (

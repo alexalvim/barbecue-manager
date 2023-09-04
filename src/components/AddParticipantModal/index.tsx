@@ -87,14 +87,14 @@ export const AddParticipantModal = ({
             label={'Nome'}
             placeholder={'Nome do participante'}
             type={'text'}
-            error={errors.name || null}
+            errorMessage={errors?.name?.message?.toString() || null}
             formProps={{ ...register('name') }}
           />
           <Field
             label={'Valor da contribuição em reais'}
             placeholder={'Ex: 10,00'}
             type={'text'}
-            error={errors.contributeValue || null}
+            errorMessage={errors?.contributeValue?.message?.toString() || null}
             formProps={{ ...register('contributeValue') }}
           />
           {barbecue?.priceWithoutDrinks || barbecue?.priceWithDrinks ? (

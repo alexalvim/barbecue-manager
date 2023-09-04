@@ -105,7 +105,7 @@ export const RegisterBarbecueModal = ({
             label={'Título'}
             placeholder={'Título do evento'}
             type={'text'}
-            error={errors.title || null}
+            errorMessage={errors?.title?.message?.toString() || null}
             formProps={{ ...register('title') }}
           />
 
@@ -113,7 +113,7 @@ export const RegisterBarbecueModal = ({
             label={'Data do churras'}
             placeholder={'dd/mm/aaaa'}
             type={'text'}
-            error={errors.eventDate || null}
+            errorMessage={errors?.eventDate?.message?.toString() || null}
             formProps={{ ...register('eventDate') }}
           />
 
@@ -121,7 +121,7 @@ export const RegisterBarbecueModal = ({
             label={'Descrição'}
             placeholder={'Descrição'}
             type={'textarea'}
-            error={errors.description || null}
+            errorMessage={errors?.description?.message?.toString() || null}
             formProps={{ ...register('description') }}
           />
 
@@ -129,7 +129,7 @@ export const RegisterBarbecueModal = ({
             label={'Observação'}
             placeholder={'Observação'}
             type={'text'}
-            error={errors.observation || null}
+            errorMessage={errors?.observation?.message?.toString() || null}
             formProps={{ ...register('observation') }}
           />
 
@@ -137,7 +137,7 @@ export const RegisterBarbecueModal = ({
             label={'Valor sugerido com bebida em reais'}
             placeholder={'Ex: 10,00'}
             type={'text'}
-            error={errors.priceWithDrinks || null}
+            errorMessage={errors?.priceWithDrinks?.message?.toString() || null}
             formProps={{ ...register('priceWithDrinks') }}
           />
 
@@ -145,7 +145,9 @@ export const RegisterBarbecueModal = ({
             label={'Valor sugerido sem bebida em reais'}
             placeholder={'Ex: 5,00'}
             type={'text'}
-            error={errors.priceWithoutDrinks || null}
+            errorMessage={
+              errors?.priceWithoutDrinks?.message?.toString() || null
+            }
             formProps={{ ...register('priceWithoutDrinks') }}
           />
         </FieldsWrapper>

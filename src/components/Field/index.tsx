@@ -1,4 +1,4 @@
-import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
+import { UseFormRegisterReturn } from 'react-hook-form'
 import {
   ContentWrapper,
   ErrorMessage,
@@ -8,11 +8,11 @@ import {
 } from './styles'
 
 interface IFieldProps {
-  formProps: Record<string, any>
+  formProps: UseFormRegisterReturn<string>
   label: string
   placeholder: string
   type: string
-  error: Record<string, any> | null
+  errorMessage: string | null
 }
 
 export const Field = ({
@@ -20,7 +20,7 @@ export const Field = ({
   label,
   placeholder,
   type,
-  error,
+  errorMessage,
 }: IFieldProps) => {
   return (
     <ContentWrapper>
@@ -30,9 +30,7 @@ export const Field = ({
       ) : (
         <FieldInput type={type} placeholder={placeholder} {...formProps} />
       )}
-      {error && error.message ? (
-        <ErrorMessage>{error.message}</ErrorMessage>
-      ) : null}
+      {errorMessage ? <ErrorMessage>{errorMessage}</ErrorMessage> : null}
     </ContentWrapper>
   )
 }

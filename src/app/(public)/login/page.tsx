@@ -59,7 +59,7 @@ const Login = () => {
             label={'Login'}
             placeholder={'email'}
             type={'email'}
-            error={errors.email || null}
+            errorMessage={errors?.email?.message?.toString() || null}
             formProps={{ ...register('email') }}
           />
 
@@ -67,7 +67,7 @@ const Login = () => {
             label={'Senha'}
             placeholder={'senha'}
             type={'password'}
-            error={errors.password || null}
+            errorMessage={errors?.password?.message?.toString() || null}
             formProps={{ ...register('password') }}
           />
 

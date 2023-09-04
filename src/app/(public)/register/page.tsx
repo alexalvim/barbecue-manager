@@ -68,7 +68,7 @@ const Register = () => {
             label={'Nome'}
             placeholder={'nome'}
             type={'text'}
-            error={errors.name || null}
+            errorMessage={errors?.name?.message?.toString() || null}
             formProps={{ ...register('name') }}
           />
 
@@ -76,7 +76,7 @@ const Register = () => {
             label={'Login'}
             placeholder={'email'}
             type={'email'}
-            error={errors.email || null}
+            errorMessage={errors?.email?.message?.toString() || null}
             formProps={{ ...register('email') }}
           />
 
@@ -84,7 +84,7 @@ const Register = () => {
             label={'Senha'}
             placeholder={'senha'}
             type={'password'}
-            error={errors.password || null}
+            errorMessage={errors?.password?.message?.toString() || null}
             formProps={{ ...register('password') }}
           />
 
