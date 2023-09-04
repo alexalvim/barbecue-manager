@@ -4,7 +4,7 @@ import { clearAuthToken, getAuthToken } from '@/auth/login'
 import { useUser } from '@/service/user'
 import { IUser } from '@/types'
 import { useRouter } from 'next/navigation'
-import { createContext, useEffect } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 interface IAuthProviderProps {
   children: JSX.Element
@@ -18,12 +18,16 @@ export const AuthProvider = ({
   requireLogin,
 }: IAuthProviderProps) => {
   const router = useRouter()
-  const token = getAuthToken()
+  const [token, setToken] = useState<string | null>(null)
   const { user, error, isLoading } = useUser(token || '')
 
   useEffect(() => {
+    setToken(getAuthToken() || '')
+  }, [])
+
+  useEffect(() => {
     const verifyLogin = async () => {
-      if (isLoading) {
+      if (isLoading || token === null) {
         return
       }
       if (requireLogin && (!token || !user || error)) {
