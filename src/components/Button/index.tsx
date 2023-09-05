@@ -1,3 +1,3 @@
-import { Button } from './styles'
+import { Button } from './Button'
 
 export { Button }

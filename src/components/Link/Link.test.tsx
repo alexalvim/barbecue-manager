@@ -30,7 +30,9 @@ describe('LinkButton', () => {
     }
     render(
       <ThemeProvider theme={light}>
-        <LinkButton onClick={mockedProps.onClick}>Label</LinkButton>
+        <LinkButton onClick={mockedProps.onClick}>
+          {mockedProps.label}
+        </LinkButton>
       </ThemeProvider>,
     )
     const linkText = screen.getByText(mockedProps.label)
