@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 
 import { ThemeProvider } from 'styled-components'
 import { light } from '@/styles/themes/light'
-import LoginPage from './page'
+import RegisterPage from './page'
 
 const mockedHandleSubmit = jest.fn()
 
@@ -23,17 +23,22 @@ jest.mock('next/navigation', () => ({
   }),
 }))
 
-describe('LoginPage', () => {
+describe('RegisterPage', () => {
   it('should render component correctly', () => {
     render(
       <ThemeProvider theme={light}>
-        <LoginPage />
+        <RegisterPage />
       </ThemeProvider>,
     )
+    const nameInput = screen.getByPlaceholderText('nome')
     const emailInput = screen.getByPlaceholderText('email')
     const passwordInput = screen.getByPlaceholderText('senha')
-    const registerLink = screen.getByText('Cadastrar-se')
-    const enterButton = screen.getByText('Entrar')
+    const loginLink = screen.getByText('Voltar para o login')
+    const registerButton = screen.getByText('Cadastrar')
+
+    fireEvent.change(nameInput, {
+      target: { value: 'test name' },
+    })
 
     fireEvent.change(emailInput, {
       target: { value: 'test@test.com' },
@@ -43,13 +48,14 @@ describe('LoginPage', () => {
       target: { value: '12345678' },
     })
 
-    fireEvent.click(enterButton)
+    fireEvent.click(registerButton)
 
+    expect(nameInput).toBeInTheDocument()
     expect(emailInput).toBeInTheDocument()
     expect(passwordInput).toBeInTheDocument()
-    expect(registerLink).toBeInTheDocument()
-    expect(registerLink).toHaveAttribute('href', '/register')
-    expect(enterButton).toBeInTheDocument()
+    expect(loginLink).toBeInTheDocument()
+    expect(loginLink).toHaveAttribute('href', '/login')
+    expect(registerButton).toBeInTheDocument()
     expect(mockedHandleSubmit).toHaveBeenCalled()
   })
 })
