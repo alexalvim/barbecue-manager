@@ -92,6 +92,7 @@ describe('AddParticipantModal', () => {
     expect(labelPriceWithDrinks).toBeInTheDocument()
     expect(labelPriceWithoutDrinks).toBeInTheDocument()
     expect(closeButton).toBeInTheDocument()
+    expect(addButton).toBeInTheDocument()
     expect(mockedProps.onClose).toHaveBeenCalled()
     expect(mockedHandleSubmit).toHaveBeenCalled()
   })
