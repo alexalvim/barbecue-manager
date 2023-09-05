@@ -50,7 +50,7 @@ const Barbecue = () => {
   return (
     <>
       <ContentWrapper>
-        <BackLink href={'/home'}>
+        <BackLink data-testid={'barbecue-back-button'} href={'/home'}>
           <ArrowBackIcon />
         </BackLink>
         <div>
