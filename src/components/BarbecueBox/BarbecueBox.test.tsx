@@ -49,7 +49,7 @@ describe('BarbecueBox', () => {
       `${mockedProps.barbecue.participants.length}`,
     )
     const barbecuePrice = screen.getByText(
-      `R$${formatCentsToCurrency(mockedTotalPrice)}`,
+      `R$${formatCentsToCurrency(mockedTotalPrice, false)}`,
     )
 
     expect(barbecueDate).toBeInTheDocument()

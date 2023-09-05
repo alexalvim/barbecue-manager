@@ -34,6 +34,7 @@ export const BarbecueBox = ({ barbecue }: IBarbecueBoxProps) => {
               (acc, p) => acc + p.contributeValue,
               0,
             ) || 0,
+            false,
           )}
         </TopicInfo>
       </TopicHolder>

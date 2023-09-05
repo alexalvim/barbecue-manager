@@ -64,11 +64,13 @@ describe('AddParticipantModal', () => {
     const labelPriceWithDrinks = screen.getByText(
       `R$ ${formatCentsToCurrency(
         mockedProps.barbecue.priceWithDrinks,
+        false,
       )} com bebida`,
     )
     const labelPriceWithoutDrinks = screen.getByText(
       `R$ ${formatCentsToCurrency(
         mockedProps.barbecue.priceWithoutDrinks,
+        false,
       )} sem bebida`,
     )
     const closeButton = screen.getByText('Fechar')

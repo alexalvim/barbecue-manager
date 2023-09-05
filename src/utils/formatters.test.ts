@@ -16,10 +16,16 @@ describe('Formatters', () => {
   })
 
   describe('formatCentsToCurrency', () => {
-    it('shold return formated value', () => {
-      const valueInCents = 950
-      const formatedValue = '9,50'
-      expect(formatCentsToCurrency(valueInCents)).toBe(formatedValue)
+    it('shold return formated value with cents', () => {
+      const valueInCents = 900
+      const formatedValue = '9,00'
+      expect(formatCentsToCurrency(valueInCents, true)).toBe(formatedValue)
+    })
+
+    it('shold return formated value without cents', () => {
+      const valueInCents = 900
+      const formatedValue = '9'
+      expect(formatCentsToCurrency(valueInCents, false)).toBe(formatedValue)
     })
   })
 })

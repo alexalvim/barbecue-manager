@@ -29,11 +29,11 @@ export const FieldTextArea = styled.textarea`
   padding: ${({ theme }) => `${theme.spaces.medium} ${theme.spaces.base}`};
   resize: none;
   height: 200px;
-  font-family: __Inter_20951f, __Inter_Fallback_20951f;
+  font-family: __Raleway_bcd626, __Raleway_Fallback_bcd626;
 
   &::placeholder {
     font-style: italic;
-    font-family: __Inter_20951f, __Inter_Fallback_20951f;
+    font-family: __Raleway_bcd626, __Raleway_Fallback_bcd626;
   }
 `
 

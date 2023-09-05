@@ -1,9 +1,18 @@
-export const formatCentsToCurrency = (cents: number): string => {
+export const formatCentsToCurrency = (
+  cents: number,
+  showCents: boolean,
+): string => {
   if (cents < 100) {
+    if (cents === 0 && !showCents) {
+      return '0'
+    }
     if (cents < 10) {
       return `0,0${cents}`
     }
     return `0,${cents}`
+  }
+  if (cents % 100 === 0 && !showCents) {
+    return cents.toString().substring(0, cents.toString().length - 2)
   }
   return `${cents.toString().substring(0, cents.toString().length - 2)},${cents
     .toString()

@@ -75,6 +75,7 @@ const Barbecue = () => {
                     (acc, p) => acc + p.contributeValue,
                     0,
                   ) || 0,
+                  false,
                 )}
               </TopicInfo>
             </ContentHeaderLine>

@@ -73,6 +73,7 @@ describe('Home page', () => {
           (acc, p) => acc + p.contributeValue,
           0,
         ),
+        false,
       )}`,
     )
     const addBarbecueBox = screen.getByTestId('addbarbecuebox-wrapper')

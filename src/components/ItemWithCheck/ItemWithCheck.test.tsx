@@ -21,7 +21,7 @@ describe('ItemWithCheck', () => {
     )
     const mainLabelText = screen.getByText(mockedProps.mainLabel)
     const priceText = screen.getByText(
-      `R$ ${formatCentsToCurrency(mockedProps.price)}`,
+      `R$ ${formatCentsToCurrency(mockedProps.price, true)}`,
     )
     const checkbox = screen.getByTestId('customcheckbox-input')
     const removeButton = screen.getByTestId('itemwithcheck-removebutton')
@@ -53,7 +53,7 @@ describe('ItemWithCheck', () => {
     )
     const mainLabelText = screen.getByText(mockedProps.mainLabel)
     const priceText = screen.getByText(
-      `R$ ${formatCentsToCurrency(mockedProps.price)}`,
+      `R$ ${formatCentsToCurrency(mockedProps.price, true)}`,
     )
     const checkbox = screen.getByTestId('customcheckbox-input')
     const removeButton = screen.getByTestId('itemwithcheck-removebutton')

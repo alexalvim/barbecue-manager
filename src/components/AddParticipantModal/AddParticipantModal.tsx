@@ -107,8 +107,9 @@ export const AddParticipantModal = ({
                 <>
                   <br />
                   <span>
-                    R$ {formatCentsToCurrency(barbecue?.priceWithoutDrinks)} sem
-                    bebida
+                    R${' '}
+                    {formatCentsToCurrency(barbecue?.priceWithoutDrinks, false)}{' '}
+                    sem bebida
                   </span>
                 </>
               ) : null}
@@ -116,8 +117,8 @@ export const AddParticipantModal = ({
                 <>
                   <br />
                   <span>
-                    R$ {formatCentsToCurrency(barbecue?.priceWithDrinks)} com
-                    bebida
+                    R$ {formatCentsToCurrency(barbecue?.priceWithDrinks, false)}{' '}
+                    com bebida
                   </span>
                 </>
               ) : null}

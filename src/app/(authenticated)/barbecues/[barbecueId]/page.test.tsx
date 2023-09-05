@@ -86,6 +86,7 @@ describe('Barbecue page', () => {
           (acc, p) => acc + p.contributeValue,
           0,
         ),
+        false,
       )}`,
     )
     const barbecueFirstParticipant = screen.getByText(

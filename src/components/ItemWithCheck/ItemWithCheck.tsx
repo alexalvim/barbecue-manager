@@ -28,7 +28,7 @@ export const ItemWithCheck = ({
       </TextHolder>
       <TextHolder>
         <ItemText $linethrough={checked}>
-          R$ {formatCentsToCurrency(price)}
+          R$ {formatCentsToCurrency(price, true)}
         </ItemText>
         <RemoveButton
           data-testid={'itemwithcheck-removebutton'}
