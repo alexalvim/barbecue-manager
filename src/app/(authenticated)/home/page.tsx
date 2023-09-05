@@ -2,7 +2,12 @@
 
 import { AuthContext } from '@/context/AuthProvider'
 import { useContext, useState } from 'react'
-import { BarbecuesList, ContentWrapper, LoadingMessage } from './styles'
+import {
+  BarbecuesList,
+  ContentHolder,
+  ContentWrapper,
+  LoadingMessage,
+} from './styles'
 import { AddBarbecueBox } from '@/components/AddBarbecueBox'
 import { RegisterBarbecueModal } from '@/components/RegisterBarbecueModal'
 import { BarbecueBox } from '@/components/BarbecueBox'
@@ -19,18 +24,20 @@ const Home = () => {
   return (
     <>
       <ContentWrapper>
-        <BarbecuesList>
-          {user.barbecues.map((b) => (
-            <li key={b.id}>
-              <BarbecueBox barbecue={b} />
+        <ContentHolder>
+          <BarbecuesList>
+            {user.barbecues.map((b) => (
+              <li key={b.id}>
+                <BarbecueBox barbecue={b} />
+              </li>
+            ))}
+            <li>
+              <AddBarbecueBox
+                onClick={() => setRegisterBarbecueModalOpened(true)}
+              />
             </li>
-          ))}
-          <li>
-            <AddBarbecueBox
-              onClick={() => setRegisterBarbecueModalOpened(true)}
-            />
-          </li>
-        </BarbecuesList>
+          </BarbecuesList>
+        </ContentHolder>
       </ContentWrapper>
       <RegisterBarbecueModal
         user={user}

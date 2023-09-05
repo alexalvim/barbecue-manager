@@ -63,12 +63,7 @@ const Register = () => {
   return (
     <ContentWrapper>
       <ContentHolder>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            return handleSubmit(onSubmit)
-          }}
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Field
             label={'Nome'}
             placeholder={'nome'}

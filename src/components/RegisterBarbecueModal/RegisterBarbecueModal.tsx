@@ -99,12 +99,7 @@ export const RegisterBarbecueModal = ({
     >
       <ModalTitle>Cadastrar churras</ModalTitle>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          return handleSubmit(onSubmit)
-        }}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FieldsWrapper>
           <Field
             label={'Título'}

@@ -10,6 +10,7 @@ import {
   BarbecueTitle,
   ButtonHolder,
   ContentHeaderLine,
+  ContentHolder,
   ContentText,
   ContentWrapper,
   EventDate,
@@ -38,7 +39,9 @@ const Barbecue = () => {
   if (!user) {
     return (
       <ContentWrapper>
-        <LoadingMessage>Carregando</LoadingMessage>
+        <ContentHolder>
+          <LoadingMessage>Carregando</LoadingMessage>
+        </ContentHolder>
       </ContentWrapper>
     )
   }
@@ -50,69 +53,71 @@ const Barbecue = () => {
   return (
     <>
       <ContentWrapper>
-        <BackLink data-testid={'barbecue-back-button'} href={'/home'}>
-          <ArrowBackIcon />
-        </BackLink>
-        <div>
-          <ContentHeaderLine>
-            <EventDate>{barbecue?.eventDate}</EventDate>
-            <TopicInfo>
-              <PeopleOutlineOutlinedIcon />
-              {barbecue?.participants.length}
-            </TopicInfo>
-          </ContentHeaderLine>
-          <ContentHeaderLine>
-            <BarbecueTitle>{barbecue?.title}</BarbecueTitle>
-            <TopicInfo>
-              <MonetizationOnIcon />
-              R$
-              {formatCentsToCurrency(
-                barbecue?.participants.reduce(
-                  (acc, p) => acc + p.contributeValue,
-                  0,
-                ) || 0,
-              )}
-            </TopicInfo>
-          </ContentHeaderLine>
-        </div>
-        {barbecue?.description ? (
-          <ContentText>{barbecue.description}</ContentText>
-        ) : null}
-        {barbecue?.observation ? (
-          <ContentText>
-            <b>Obs:</b> {barbecue.observation}
-          </ContentText>
-        ) : null}
-        <ParticipantsList>
-          {barbecue?.participants.map((p) => (
-            <li key={p.id}>
-              <ItemWithCheck
-                price={p.contributeValue}
-                mainLabel={p.name}
-                checked={p.paid}
-                onCheck={() => {
-                  togglePaidParticipant({
-                    user,
-                    barbecueId: barbecue.id,
-                    participantId: p.id,
-                  })
-                }}
-                onRemove={() => {
-                  removeBarbecueParticipant({
-                    user,
-                    barbecueId: barbecue.id,
-                    participantId: p.id,
-                  })
-                }}
-              />
-            </li>
-          ))}
-        </ParticipantsList>
-        <ButtonHolder>
-          <Button onClick={() => setAddParticipantModalOpened(true)}>
-            Adicionar participante
-          </Button>
-        </ButtonHolder>
+        <ContentHolder>
+          <BackLink data-testid={'barbecue-back-button'} href={'/home'}>
+            <ArrowBackIcon />
+          </BackLink>
+          <div>
+            <ContentHeaderLine>
+              <EventDate>{barbecue?.eventDate}</EventDate>
+              <TopicInfo>
+                <PeopleOutlineOutlinedIcon />
+                {barbecue?.participants.length}
+              </TopicInfo>
+            </ContentHeaderLine>
+            <ContentHeaderLine>
+              <BarbecueTitle>{barbecue?.title}</BarbecueTitle>
+              <TopicInfo>
+                <MonetizationOnIcon />
+                R$
+                {formatCentsToCurrency(
+                  barbecue?.participants.reduce(
+                    (acc, p) => acc + p.contributeValue,
+                    0,
+                  ) || 0,
+                )}
+              </TopicInfo>
+            </ContentHeaderLine>
+          </div>
+          {barbecue?.description ? (
+            <ContentText>{barbecue.description}</ContentText>
+          ) : null}
+          {barbecue?.observation ? (
+            <ContentText>
+              <b>Obs:</b> {barbecue.observation}
+            </ContentText>
+          ) : null}
+          <ParticipantsList>
+            {barbecue?.participants.map((p) => (
+              <li key={p.id}>
+                <ItemWithCheck
+                  price={p.contributeValue}
+                  mainLabel={p.name}
+                  checked={p.paid}
+                  onCheck={() => {
+                    togglePaidParticipant({
+                      user,
+                      barbecueId: barbecue.id,
+                      participantId: p.id,
+                    })
+                  }}
+                  onRemove={() => {
+                    removeBarbecueParticipant({
+                      user,
+                      barbecueId: barbecue.id,
+                      participantId: p.id,
+                    })
+                  }}
+                />
+              </li>
+            ))}
+          </ParticipantsList>
+          <ButtonHolder>
+            <Button onClick={() => setAddParticipantModalOpened(true)}>
+              Adicionar participante
+            </Button>
+          </ButtonHolder>
+        </ContentHolder>
       </ContentWrapper>
       <AddParticipantModal
         user={user}

@@ -84,12 +84,7 @@ export const AddParticipantModal = ({
       isOpened={isOpened && !!barbecue}
     >
       <ModalTitle>Adicionar Participante</ModalTitle>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          return handleSubmit(onSubmit)
-        }}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FieldsWrapper>
           <Field
             label={'Nome'}

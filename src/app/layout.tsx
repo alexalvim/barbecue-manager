@@ -1,11 +1,11 @@
 'use client'
 
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 import { ThemeProvider } from 'styled-components'
 import { light } from '@/styles/themes/light'
 
-const inter = Inter({ subsets: ['latin'] })
+const raleway = Raleway({ subsets: ['latin'] })
 
 export default function RootLayout({
   children,
@@ -18,8 +18,12 @@ export default function RootLayout({
         <title>Agenda de churras</title>
       </head>
       <body
-        className={inter.className}
-        style={{ backgroundColor: light.colors.mainColor }}
+        className={raleway.className}
+        style={{
+          backgroundColor: light.colors.mainColor,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
       >
         <ThemeProvider theme={light}>{children}</ThemeProvider>
       </body>

@@ -8,6 +8,12 @@ export const LoadingMessage = styled.span`
 
 export const ContentWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.lightestColor};
+  flex-grow: 1;
+  padding: 0 ${({ theme }) => theme.spaces.base};
+`
+
+export const ContentHolder = styled.div`
+  background-color: ${({ theme }) => theme.colors.lightestColor};
   box-shadow: ${({ theme }) => theme.colors.defaultBoxShadow};
   padding: ${({ theme }) => theme.spaces.base};
   border-radius: 2px;

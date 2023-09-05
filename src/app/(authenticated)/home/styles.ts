@@ -14,6 +14,11 @@ export const LoadingMessage = styled.span`
 `
 
 export const ContentWrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors.lightestColor};
+  flex-grow: 1;
+`
+
+export const ContentHolder = styled.div`
   padding: ${({ theme }) => `0 ${theme.spaces.base} ${theme.spaces.large}`};
   margin: 0 auto;
   width: 100%;
