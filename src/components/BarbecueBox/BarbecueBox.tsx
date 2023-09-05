@@ -8,7 +8,7 @@ import {
   TopicHolder,
   TopicInfo,
 } from './styles'
-import { formatCentsToCurrency } from '@/utils'
+import { formatCentsToCurrency } from '@/utils/formatters'
 
 interface IBarbecueBoxProps {
   barbecue: IBarbecue

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { light } from '@/styles/themes/light'
 import { BarbecueBox } from '.'
-import { formatCentsToCurrency } from '@/utils'
+import { formatCentsToCurrency } from '@/utils/formatters'
 
 describe('BarbecueBox', () => {
   it('should render component correctly', () => {

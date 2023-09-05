@@ -20,7 +20,7 @@ import {
 import { useParams, useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
 import { AddParticipantModal } from '@/components/AddParticipantModal'
-import { formatCentsToCurrency } from '@/utils'
+import { formatCentsToCurrency } from '@/utils/formatters'
 import { ItemWithCheck } from '@/components/ItemWithCheck'
 import {
   removeBarbecueParticipant,

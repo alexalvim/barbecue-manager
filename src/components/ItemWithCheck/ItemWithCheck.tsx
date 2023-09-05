@@ -1,4 +1,4 @@
-import { formatCentsToCurrency } from '@/utils'
+import { formatCentsToCurrency } from '@/utils/formatters'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import { ContentHolder, ItemText, RemoveButton, TextHolder } from './styles'
 import { CustomCheckbox } from '../CustomCheckbox'

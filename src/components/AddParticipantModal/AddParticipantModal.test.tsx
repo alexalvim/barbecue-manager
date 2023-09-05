@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { light } from '@/styles/themes/light'
 import { AddParticipantModal } from '.'
-import { formatCentsToCurrency } from '@/utils'
+import { formatCentsToCurrency } from '@/utils/formatters'
 
 const mockedHandleSubmit = jest.fn()
 

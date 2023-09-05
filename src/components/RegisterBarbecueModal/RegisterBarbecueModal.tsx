@@ -6,7 +6,7 @@ import { Button } from '../Button'
 import { IUser } from '@/types'
 import { createBarbecue } from '@/service/user'
 import { v4 as uuidv4 } from 'uuid'
-import { formatCurrencyToCents } from '@/utils'
+import { formatCurrencyToCents } from '@/utils/formatters'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -99,7 +99,12 @@ export const RegisterBarbecueModal = ({
     >
       <ModalTitle>Cadastrar churras</ModalTitle>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          return handleSubmit(onSubmit)
+        }}
+      >
         <FieldsWrapper>
           <Field
             label={'Título'}
@@ -154,7 +159,8 @@ export const RegisterBarbecueModal = ({
 
         <ButtonsWrapper>
           <Button
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               onClose()
               reset()
             }}
