@@ -1,9 +1,3 @@
-import { ContentWrapper } from './styles'
+import { ErrorArea } from './ErrorArea'
 
-interface IErrorAreaProps {
-  message: string
-}
-
-export const ErrorArea = ({ message }: IErrorAreaProps) => {
-  return <ContentWrapper>{message}</ContentWrapper>
-}
+export { ErrorArea }
